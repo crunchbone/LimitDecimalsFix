@@ -66,6 +66,17 @@ function Notify(Message) {
     CurrentNotif = figma.notify(Message);
 }
 
+function toRad(deg){
+    var pi = Math.PI;
+    return deg * pi/180;
+}
+
+function toDeg(rad){
+    var pi = Math.PI;
+    return rad * 180/pi;
+}
+
+
 function getGradientRotation(gradientTransform) {
     const a = gradientTransform[0][0];
     const b = gradientTransform[0][1];
@@ -580,6 +591,29 @@ const ElementTypes = {
             Children: [],
             Parent: Parent,
         }
+
+        var degrees = -Element.rotation + 90;
+        var r = toRad(degrees);
+
+        var x = Element.x;
+        var y = Element.y;
+
+        var fang = Math.atan2(Element.height/2,Element.width/2) + toRad(-degrees); 
+        //fang = toRad(-toDeg(fang)) //reflect because we're going inward to find the center
+        console.log(toDeg(fang));
+
+        var cx = Element.x + (Element.width/2); //center positions are the only thing wrong
+        var cy = Element.y - (Element.height/2);
+
+        var tx = x-cx;
+        var ty = y-cy;
+
+        var rx = (tx*Math.cos(r)) - (ty*Math.sin(r));
+        var ry = (tx*Math.sin(r)) + (ty*Math.cos(r));
+
+        var fx = cx + rx;
+        var fy = cy + ry;
+        console.log(fx,fy);
 
         if (Parent !== undefined) {
             if (Parent.GroupOpacity !== undefined) Properties.GroupOpacity = Parent.GroupOpacity * Properties.GroupOpacity; // maths :)
