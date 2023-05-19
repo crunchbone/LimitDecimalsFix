@@ -598,7 +598,7 @@ const ElementTypes = {
         var x = Element.x;
         var y = Element.y;
 
-        var fang = Math.atan2(Element.height/2,Element.width/2) + toRad(-degrees); 
+        var fang = toRad(270) - (Math.atan2(Element.height/2,Element.width/2) + toRad(-degrees)); 
         //fang = toRad(-toDeg(fang)) //reflect because we're going inward to find the center
         console.log(toDeg(fang));
 
