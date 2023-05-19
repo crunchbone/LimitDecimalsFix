@@ -591,15 +591,22 @@ const ElementTypes = {
             Children: [],
             Parent: Parent,
         }
-
-        var degrees = -Element.rotation + 90;
+        
+        var degrees = -Element.rotation;
+        
         var r = toRad(degrees);
 
         var x = Element.x;
         var y = Element.y;
 
-        var fang = toRad(270) - (Math.atan2(Element.height/2,Element.width/2) + toRad(-degrees)); 
-        //fang = toRad(-toDeg(fang)) //reflect because we're going inward to find the center
+        var fang = 0;
+
+        if(Math.abs(degrees) !== Element.rotation && degrees !== 0){ //See if negative
+            fang = toRad(270) - (Math.atan2(Element.height/2,Element.width/2) + toRad(degrees+450)); // Addd 360 to make it positive and 90 to make it uniform with unit circle
+        } else { //Positive Rotation works fine so just add 90
+            fang = toRad(270) - (Math.atan2(Element.height/2,Element.width/2) + toRad(degrees+90)); 
+        }
+       
         console.log(toDeg(fang));
 
         var cx = Element.x + (Element.width/2); //center positions are the only thing wrong
