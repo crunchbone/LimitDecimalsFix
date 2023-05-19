@@ -591,8 +591,7 @@ const ElementTypes = {
             Element: Element,
         }
         
-        var degrees = -Element.rotation;
-        
+        var degrees = Element.rotation;
         var r = toRad(degrees);
 
         var x = Element.x;
@@ -605,11 +604,13 @@ const ElementTypes = {
         } else { //Positive Rotation works fine so just add 90
             fang = toRad(270) - (Math.atan2(Element.height/2,Element.width/2) + toRad(degrees+90)); 
         }
-       
-        console.log(toDeg(fang));
 
-        var cx = Element.x + (Element.width/2); //center positions are the only thing wrong
-        var cy = Element.y - (Element.height/2);
+        fang = toRad(toDeg(fang) + 180); // reflect or alternatively we could use negative distance
+
+        var dist = Math.sqrt((Math.pow(Element.width/2,2)) + (Math.pow(Element.height/2,2)));
+
+        var cx = x + (Math.cos(fang) * dist);
+        var cy = y + (Math.sin(fang) * dist);
 
         var tx = x-cx;
         var ty = y-cy;
@@ -620,6 +621,17 @@ const ElementTypes = {
         var fx = cx + rx;
         var fy = cy + ry;
         console.log(fx,fy);
+        // the left top corner without rotation
+        // if you were to set the rotation to 0 and get the position the frame would move
+        Properties.Position.X = fx;
+        Properties.Position.Y = fy;// Update the position
+
+        if(Math.abs(degrees) !== degrees && degrees !== 0){ // check if negative
+           Properties.Rotation = -degrees // negative is the clockwise way for roblox
+        } else { 
+           Properties.Rotation = -degrees+360 // need to flip it
+        }
+
 
         if (Parent !== undefined) {
             if (Parent.GroupOpacity !== undefined) Properties.GroupOpacity = Parent.GroupOpacity * Properties.GroupOpacity; // maths :)
@@ -1003,16 +1015,6 @@ function CreateRobloxElement(Properties) { // Creates the roblox xml for the ele
 
     if (Properties.Rotation !== undefined && Properties.Rotation !== 0) {
         ExtendXML(`<float name="Rotation">${LimitDecimals(Properties.Rotation, 3)}</float>`);
-
-        if (Properties.Position !== undefined && Properties.Size !== undefined) {
-            var Size = Properties.Size;
-            var BoundingBox = Properties.Element.absoluteBoundingBox;
-
-            Properties.Position = {
-                X: BoundingBox.x + ((BoundingBox.width - Size.X) / 2),
-                Y: BoundingBox.y + ((BoundingBox.height - Size.Y) / 2)
-            }
-        }
     }
 
     if (Properties.Position !== undefined) {
