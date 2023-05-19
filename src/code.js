@@ -675,47 +675,6 @@ const ElementTypes = {
             Element: Element,
         }
 
-        var degrees = Element.rotation;
-        var r = toRad(degrees);
-
-        var x = Element.x;
-        var y = Element.y;
-
-        var fang = 0;
-
-        if(Math.abs(degrees) !== Element.rotation && degrees !== 0){ //See if negative
-            fang = toRad(270) - (Math.atan2(Element.height/2,Element.width/2) + toRad(degrees+450)); // Addd 360 to make it positive and 90 to make it uniform with unit circle
-        } else { //Positive Rotation works fine so just add 90
-            fang = toRad(270) - (Math.atan2(Element.height/2,Element.width/2) + toRad(degrees+90)); 
-        }
-
-        fang = toRad(toDeg(fang) + 180); // reflect or alternatively we could use negative distance
-
-        var dist = Math.sqrt((Math.pow(Element.width/2,2)) + (Math.pow(Element.height/2,2)));
-
-        var cx = x + (Math.cos(fang) * dist);
-        var cy = y + (Math.sin(fang) * dist);
-
-        var tx = x-cx;
-        var ty = y-cy;
-
-        var rx = (tx*Math.cos(r)) - (ty*Math.sin(r));
-        var ry = (tx*Math.sin(r)) + (ty*Math.cos(r));
-
-        var fx = cx + rx;
-        var fy = cy + ry;
-        console.log(fx,fy);
-        // the left top corner without rotation
-        // if you were to set the rotation to 0 and get the position the frame would move
-        Properties.Position.X = fx;
-        Properties.Position.Y = fy;// Update the position
-
-        if(Math.abs(degrees) !== degrees && degrees !== 0){ // check if negative
-           Properties.Rotation = -degrees // negative is the clockwise way for roblox
-        } else { 
-           Properties.Rotation = -degrees+360 // need to flip it
-        }
-
         if (Parent !== undefined) {
             if (Parent.GroupOpacity !== undefined) Properties.BackgroundTransparency = Parent.GroupOpacity * Properties.BackgroundTransparency; // maths :)
             if (Parent._OriginalPosition !== undefined) {
@@ -806,47 +765,6 @@ const ElementTypes = {
             Element: Element,
         }
 
-        var degrees = Element.rotation;
-        var r = toRad(degrees);
-
-        var x = Element.x;
-        var y = Element.y;
-
-        var fang = 0;
-
-        if(Math.abs(degrees) !== Element.rotation && degrees !== 0){ //See if negative
-            fang = toRad(270) - (Math.atan2(Element.height/2,Element.width/2) + toRad(degrees+450)); // Addd 360 to make it positive and 90 to make it uniform with unit circle
-        } else { //Positive Rotation works fine so just add 90
-            fang = toRad(270) - (Math.atan2(Element.height/2,Element.width/2) + toRad(degrees+90)); 
-        }
-
-        fang = toRad(toDeg(fang) + 180); // reflect or alternatively we could use negative distance
-
-        var dist = Math.sqrt((Math.pow(Element.width/2,2)) + (Math.pow(Element.height/2,2)));
-
-        var cx = x + (Math.cos(fang) * dist);
-        var cy = y + (Math.sin(fang) * dist);
-
-        var tx = x-cx;
-        var ty = y-cy;
-
-        var rx = (tx*Math.cos(r)) - (ty*Math.sin(r));
-        var ry = (tx*Math.sin(r)) + (ty*Math.cos(r));
-
-        var fx = cx + rx;
-        var fy = cy + ry;
-        console.log(fx,fy);
-        // the left top corner without rotation
-        // if you were to set the rotation to 0 and get the position the frame would move
-        Properties.Position.X = fx;
-        Properties.Position.Y = fy;// Update the position
-
-        if(Math.abs(degrees) !== degrees && degrees !== 0){ // check if negative
-           Properties.Rotation = -degrees // negative is the clockwise way for roblox
-        } else { 
-           Properties.Rotation = -degrees+360 // need to flip it
-        }
-
         if (Parent !== undefined) {
             if (Parent.GroupOpacity !== undefined) Properties.BackgroundTransparency = Parent.GroupOpacity * Properties.BackgroundTransparency; // maths :)
             if (Parent._OriginalPosition !== undefined) {
@@ -905,47 +823,6 @@ const ElementTypes = {
             Element: Element,
         }
 
-        var degrees = Element.rotation;
-        var r = toRad(degrees);
-
-        var x = Element.x;
-        var y = Element.y;
-
-        var fang = 0;
-
-        if(Math.abs(degrees) !== Element.rotation && degrees !== 0){ //See if negative
-            fang = toRad(270) - (Math.atan2(Element.height/2,Element.width/2) + toRad(degrees+450)); // Addd 360 to make it positive and 90 to make it uniform with unit circle
-        } else { //Positive Rotation works fine so just add 90
-            fang = toRad(270) - (Math.atan2(Element.height/2,Element.width/2) + toRad(degrees+90)); 
-        }
-
-        fang = toRad(toDeg(fang) + 180); // reflect or alternatively we could use negative distance
-
-        var dist = Math.sqrt((Math.pow(Element.width/2,2)) + (Math.pow(Element.height/2,2)));
-
-        var cx = x + (Math.cos(fang) * dist);
-        var cy = y + (Math.sin(fang) * dist);
-
-        var tx = x-cx;
-        var ty = y-cy;
-
-        var rx = (tx*Math.cos(r)) - (ty*Math.sin(r));
-        var ry = (tx*Math.sin(r)) + (ty*Math.cos(r));
-
-        var fx = cx + rx;
-        var fy = cy + ry;
-        console.log(fx,fy);
-        // the left top corner without rotation
-        // if you were to set the rotation to 0 and get the position the frame would move
-        Properties.Position.X = fx;
-        Properties.Position.Y = fy;// Update the position
-
-        if(Math.abs(degrees) !== degrees && degrees !== 0){ // check if negative
-           Properties.Rotation = -degrees // negative is the clockwise way for roblox
-        } else { 
-           Properties.Rotation = -degrees+360 // need to flip it
-        }
-
         if (Parent !== undefined) {
             if (Parent.GroupOpacity !== undefined) Properties.TextTransparency = Parent.GroupOpacity * Properties.TextTransparency; // maths :)
             if (Parent._OriginalPosition !== undefined) {
@@ -985,47 +862,6 @@ const ElementTypes = {
             Children: [],
             Parent: Parent,
             Element: Element,
-        }
-
-        var degrees = Element.rotation;
-        var r = toRad(degrees);
-
-        var x = Element.x;
-        var y = Element.y;
-
-        var fang = 0;
-
-        if(Math.abs(degrees) !== Element.rotation && degrees !== 0){ //See if negative
-            fang = toRad(270) - (Math.atan2(Element.height/2,Element.width/2) + toRad(degrees+450)); // Addd 360 to make it positive and 90 to make it uniform with unit circle
-        } else { //Positive Rotation works fine so just add 90
-            fang = toRad(270) - (Math.atan2(Element.height/2,Element.width/2) + toRad(degrees+90)); 
-        }
-
-        fang = toRad(toDeg(fang) + 180); // reflect or alternatively we could use negative distance
-
-        var dist = Math.sqrt((Math.pow(Element.width/2,2)) + (Math.pow(Element.height/2,2)));
-
-        var cx = x + (Math.cos(fang) * dist);
-        var cy = y + (Math.sin(fang) * dist);
-
-        var tx = x-cx;
-        var ty = y-cy;
-
-        var rx = (tx*Math.cos(r)) - (ty*Math.sin(r));
-        var ry = (tx*Math.sin(r)) + (ty*Math.cos(r));
-
-        var fx = cx + rx;
-        var fy = cy + ry;
-        console.log(fx,fy);
-        // the left top corner without rotation
-        // if you were to set the rotation to 0 and get the position the frame would move
-        Properties.Position.X = fx;
-        Properties.Position.Y = fy;// Update the position
-
-        if(Math.abs(degrees) !== degrees && degrees !== 0){ // check if negative
-           Properties.Rotation = -degrees // negative is the clockwise way for roblox
-        } else { 
-           Properties.Rotation = -degrees+360 // need to flip it
         }
 
         if (Parent !== undefined) {
